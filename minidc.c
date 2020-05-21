@@ -87,13 +87,9 @@ void stack_dup(void)
 
 void stack_swap(void)
 {
-	if (stack_size < 2) {
-		printf("error: at least 2 values needed in stack\n");
- 	} else {
 		int val = stack[stack_size - 1];
 		stack[stack_size - 1] = stack[stack_size - 2];
 		stack[stack_size - 2] = val;
-	}
 }
 
 void exec_line(char * lineptr)
@@ -108,6 +104,10 @@ void exec_line(char * lineptr)
 			stack_push(strtol(lineptr, &lineptr, 10));
 			continue;
 
+		} else if ((*lineptr == '+' || *lineptr == '-' || *lineptr == '*' 
+				|| *lineptr == '/' || *lineptr == '%' 
+				|| *lineptr == 'r') && stack_size < 2) {
+			printf("error: at least 2 values needed in stack\n");
 		}
 		switch(*lineptr) {
 		case '+':
