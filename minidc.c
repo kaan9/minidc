@@ -51,7 +51,7 @@ void stack_pop(void)
 	if (stack_size)
 		printf("%d\n", stack[--stack_size ]);
 	else
-		printf("error: stack empty");
+		printf("error: stack empty\n");
 }
 
 void stack_print(void)
@@ -59,7 +59,7 @@ void stack_print(void)
 	if (stack_size)
 		printf("%d\n", stack[stack_size - 1]);
 	else
-		printf("error: stack empty");
+		printf("error: stack empty\n");
 }
 
 void stack_full_print(void)
@@ -108,6 +108,8 @@ void exec_line(char * lineptr)
 				|| *lineptr == '/' || *lineptr == '%' 
 				|| *lineptr == 'r') && stack_size < 2) {
 			printf("error: at least 2 values needed in stack\n");
+			lineptr++;
+			continue;
 		}
 		switch(*lineptr) {
 		case '+':
