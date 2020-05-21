@@ -36,12 +36,20 @@ void stack_mul(void)
 
 void stack_div(void)
 {
+	if (stack[stack_size - 1] == 0) {
+		printf("error: divide by zero\n");
+		return;
+	}
 	stack[stack_size - 2] /= stack[stack_size - 1];
 	stack_size--;
 }
 
 void stack_mod(void)
 {
+	if (stack[stack_size - 1] == 0) {
+		printf("error: divide by zero\n");
+		return;
+	}
 	stack[stack_size - 2] %= stack[stack_size - 1];
 	stack_size--;
 }
