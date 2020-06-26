@@ -1,8 +1,6 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <errno.h>
-#include <unistd.h>
 
 #define STACK_CAP 100
 
@@ -13,7 +11,8 @@ void stack_push(int val)
 {
 	if (stack_size == STACK_CAP) 
 		printf("error: stack full\n");
-	stack[stack_size++] = val;
+	else
+		stack[stack_size++] = val;
 }
 
 void stack_add(void)
@@ -38,20 +37,20 @@ void stack_div(void)
 {
 	if (stack[stack_size - 1] == 0) {
 		printf("error: divide by zero\n");
-		return;
+	} else {
+		stack[stack_size - 2] /= stack[stack_size - 1];
+		stack_size--;
 	}
-	stack[stack_size - 2] /= stack[stack_size - 1];
-	stack_size--;
 }
 
 void stack_mod(void)
 {
 	if (stack[stack_size - 1] == 0) {
 		printf("error: divide by zero\n");
-		return;
+	} else {
+		stack[stack_size - 2] %= stack[stack_size - 1];
+		stack_size--;
 	}
-	stack[stack_size - 2] %= stack[stack_size - 1];
-	stack_size--;
 }
 
 void stack_pop(void)
@@ -72,7 +71,8 @@ void stack_print(void)
 
 void stack_full_print(void)
 {
-	for (int i = stack_size - 1; i >= 0; i--)
+	int i;
+	for (i = stack_size - 1; i >= 0; i--)
 		printf("%d\n", stack[i]);
 }
 
